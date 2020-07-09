@@ -7,6 +7,12 @@ describe 'nexus3_test::cleanup_policies' do
                                file_cache_path: CACHE).converge(described_recipe)
     end
 
+    before do
+      Fauxhai.mock(platform: 'centos', version: CENTOS_VERSION)
+    end
+
+    let(:json_attributes) { Fauxhai.mock(platform: 'centos', version: CENTOS_VERSION) }
+
     it 'creates a cleanup policy' do
       expect(chef_run).to create_nexus3_cleanup_policy('foo')
     end
